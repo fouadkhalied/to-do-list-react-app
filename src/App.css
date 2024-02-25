@@ -1,0 +1,65 @@
+body
+{
+  background-color:grey;
+}
+.app
+{
+  border: 1px solid rgb(255, 255, 255);
+  margin: 100px 30%;
+  text-align: center;
+  padding: 50px;
+  border-radius: 25px;
+}
+.app h2
+{
+  color: white;
+}
+.app ul
+{
+  list-style-type:"❤️";
+  cursor: pointer;
+  font-size: 22px;
+  color: rgb(255, 255, 255);
+  margin: 10px;
+}
+.app input
+{
+  border-radius: 20px;
+  width: 200px;
+  height: 40px;
+  margin: 20px;
+}
+.app button
+{
+  width: 150px;
+  height: 30px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  display: block;
+  margin: auto;
+}
+.app li
+{
+  overflow-wrap: break-word;
+}
+.differntstyle
+{
+  list-style: "☑️";
+  text-decoration:rgb(0, 0, 0) line-through;
+}
+.div10
+{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 20px;
+  margin-bottom: 5px;
+}
+.btn_x
+{
+  color: red;
+}
