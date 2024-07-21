@@ -1,14 +1,8 @@
-body
-{
-  background-color:grey;
-}
 .app
 {
-  border: 1px solid rgb(255, 255, 255);
-  margin: 100px 30%;
-  text-align: center;
-  padding: 50px;
-  border-radius: 25px;
+  width: 99.5%;
+  border: 1px solid black;
+  height: 99.5%;
 }
 .app h2
 {
@@ -19,14 +13,14 @@ body
   list-style-type:"❤️";
   cursor: pointer;
   font-size: 22px;
-  color: rgb(255, 255, 255);
+  color: rgb(5, 5, 5);
   margin: 10px;
 }
 .app input
 {
   border-radius: 20px;
-  width: 200px;
-  height: 40px;
+  width: 150px;
+  height: 30px;
   margin: 20px;
 }
 .app button
@@ -51,15 +45,111 @@ body
 }
 .div10
 {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  width: 100%;
   text-align: center;
-  border: 1px solid white;
+  border: 1px solid rgb(255, 0, 0);
   border-radius: 20px;
   margin-bottom: 5px;
+  height: 400px;
+  overflow: scroll;
 }
 .btn_x
 {
   color: red;
+}
+/* ////////////////////////////////////////////////////////////////////////// */
+.my-input-element input::placeholder
+{
+  text-align: center;
+}
+.my-input-element input
+{
+  padding-left: 10px;
+}
+/* ////////////////////////////////////////////////////////////////////////////////////// */
+.my-input
+{
+  display: flex;
+  border: 1px solid black;
+  justify-content: space-around;
+}
+/* /////////////////////////////////////////////////////////////// */
+.my-table
+{
+  border: 1px solid black;
+  width: 100%;
+  text-align: center;
+}
+.head
+{
+   width: 30%;
+   text-align: center;
+   margin: auto;
+   border: 1px solid black;
+   margin-bottom: 50px;
+   display: flex;
+   justify-content: space-around;
+}
+/* ////////////////////////////////////////////////////////////////////// */
+
+.page-header
+{
+  width: 80%;
+  margin-top: 60px;
+  display: flex;
+  justify-content: space-around;
+  /* border: 1px solid black; */
+}
+.page-header-img
+{
+   width: 200px;
+   height: 200px;
+}
+.page-header-div
+{
+   /* border: 1px solid black; */
+   text-align: center;
+}
+.page-header-sanf
+{
+  position: absolute;
+  /* border: 1px solid black; */
+  top: 150px;
+  left: 1000px;
+}
+.table-113-120
+{
+   width: 80%;
+   margin: auto;
+   position: relative;
+}
+.table-113
+{
+  text-align: center;
+  border: 2px solid black !important;
+  width: 80%;
+  margin: auto;
+}
+.gut
+{
+  background-color: aqua;
+}
+.kh
+{
+   display: flex;
+   justify-content: space-around;
+   width: 90%;
+   margin: auto;
+   text-align: center;
+   margin-top: 30px;
+   font-weight: 600;
+   font-size: 30px;
+}
+.tarek
+{
+
+}
+.entag
+{
+
 }
