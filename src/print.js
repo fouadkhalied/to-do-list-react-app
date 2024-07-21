@@ -44,7 +44,7 @@ const Print =()=>{
             </div>         
 
             <div className='table-113-120'>
-            <Table bordered hover className='table-113'>
+            <Table bordered className='table-113'>
       <thead>
         <tr>
           <th style={{'width' : '25%'}}><p style={{'font-weight': '700','display': 'inline','font-size': '30px'}}>الاجمالي المالي</p></th>
