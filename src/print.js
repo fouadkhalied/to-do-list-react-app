@@ -19,13 +19,13 @@ const Print =()=>{
     
     window.addEventListener('load' , ()=>{
         const len = 17 - x.length;
-        const ele = [' ' , ' ' , ' ' , ' ' , ' '];
+        const ele = [' ' , ' ' , ' ' , ' ' , ' ' , ' ' , ' '];
         if(len > 0) { 
         for (let i = 0; i < len; i++) {
             x.push(ele);
         }}
         const ce = () => {
-          return x.map(row => row.slice(0, -1));
+          return x.map(row => {return row.filter((_, index) => index !== 2 && index !== 4 && index !== 6 && index !== 7)})
         }        
         console.log(x);
         console.log(len);

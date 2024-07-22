@@ -16,7 +16,8 @@ import Print from './print';
 const Todo_list = () => {
     const [x,setx] = useState(JSON.parse(localStorage.getItem('table')) || []);
     const [y,sety] = useState(JSON.parse(localStorage.getItem('total')) || 0);
-    const cv = 'X';
+    const cv = '❌';
+    const edit = '✎';
     const inputref = useRef();
     const inputref1 = useRef();
     const inputref2 = useRef();
@@ -32,7 +33,7 @@ const Todo_list = () => {
       return;
     }
 
-    const newData = [result , value ,  value1 , value2 , cv]
+    const newData = [result , value , edit ,  value1 , edit , value2 , edit , cv]
       setx([...x,newData]);
       inputref.current.value = "";
       inputref1.current.value = "";
@@ -61,9 +62,37 @@ const Todo_list = () => {
       const new_x = [...x];
       sety(y-x[index][0]);
       new_x.splice(index,1);
-      
       setx(new_x);
     }
+    /////////////////////////////////////////////////////
+    const toedit = (row,col,my)=>{
+       const new_x = [...x];
+       new_x[row][col] = my;
+       setx(new_x);
+    }
+    //////////////////////////////////////////////////
+    const recalculate = ()=>{
+      let ertd = 0;
+      for (let i = 0; i < x.length; i++) {
+         ertd += x[i][0];
+      }
+      return ertd;
+    }
+    ///////////////////////////////////////////////////
+    const toeditnum = (row,col,my) =>{
+      const new_x = [...x];
+      new_x[row][col] = my;
+      //console.log(new_x[row][0] ,new_x[row][1] , new_x[row][3] , new_x[row][5]);
+      new_x[row][0] = new_x[row][1] * new_x[row][3];
+      setx(new_x);
+      sety(recalculate);
+    }
+    ////////////////////////////////////////////////////
+    // const toeditnum2 = (row,col,my) =>{
+    //   const new_x = [...x];
+    //   new_x[row][col] = my;
+    //   setx(new_x);
+    // }
     return (
       <div className='app'> 
         <h2>To-do List</h2>
@@ -81,15 +110,21 @@ const Todo_list = () => {
           {y}
           <label>الاجمالي</label>
         </div>
+
+        {/* //////////////////////////////////////////////////////// */}
+        <div className='table-div'> 
         <Table bordered  className='table div10'>
       {/* Render table headers */}
       <thead>
         <tr>
           <th>الاجمالي المالي</th>
           <th>عدد الوحدات</th>
+          <th style={{'width' : '4%'}}>تعديل</th>
           <th>القيمه الماليه للوحده</th>
+          <th style={{'width' : '4%'}}>تعديل</th>
           <th>المقاسات</th>
-          <th>الحذف</th>
+          <th style={{'width' : '4%'}}>تعديل</th>
+          <th style={{'width' : '4%'}}>الحذف</th>
         </tr>
       </thead>
 
@@ -99,13 +134,41 @@ const Todo_list = () => {
         x.map((row, rowIndex) => (
           <tr key={rowIndex}>
             {row.map((cell, colIndex) => (
-              <td onClick={()=>{if(colIndex == 4) toDelete(rowIndex)}} style={{'cursor' : colIndex == 4 ? 'pointer' : ''}}>{cell}</td>
+              <td onClick={
+                ()=>{
+                  if(colIndex == 7) {
+                    toDelete(rowIndex)
+                  }
+                  else if(colIndex == 6) {
+                    const defs = prompt('المقاس المعدل');
+                    if(defs == "")
+                        alert("المدخل فارغ")
+                    else  
+                        toedit(rowIndex , colIndex - 1 , defs);
+                  } 
+                  else if(colIndex == 4) {
+                    const defs = prompt('القيمه الماليه المعدله');
+                    if(defs === "" || isNaN(defs) || defs === null)
+                      alert("المدخل غير صالح")
+                    else
+                      toeditnum(rowIndex , colIndex - 1 , defs);
+                  }
+                  else if(colIndex == 2) {
+                    const defs = prompt('عدد الوحدات المعدل');
+                    if(defs === "" || isNaN(defs) || defs === null)
+                      alert("المدخل غير صالح")
+                    else
+                      toeditnum(rowIndex , colIndex - 1 , defs);
+                  }
+                }
+              } style={{'cursor' : colIndex == 7 || colIndex == 6 || colIndex == 4 || colIndex == 2 ? 'pointer' : ''}}>{cell}</td>
             ))}
           </tr>
         ))
         }
       </tbody>
     </Table>
+    </div>
         <div className='my-input'>
             <div className='my-input-element'>
                 <input ref={inputref} className='input1' placeholder='المقاسات' />

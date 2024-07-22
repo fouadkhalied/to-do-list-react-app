@@ -50,6 +50,9 @@
   border: 1px solid rgb(255, 0, 0);
   border-radius: 20px;
   margin-bottom: 5px;
+}
+.table-div
+{
   height: 400px;
   overflow: scroll;
 }
