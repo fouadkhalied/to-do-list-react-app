@@ -13,6 +13,7 @@ import Table from 'react-bootstrap/Table';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Print from './print';
+import { Button } from 'react-bootstrap';
 const Todo_list = () => {
     const [x,setx] = useState(JSON.parse(localStorage.getItem('table')) || []);
     const [y,sety] = useState(JSON.parse(localStorage.getItem('total')) || 0);
@@ -29,7 +30,7 @@ const Todo_list = () => {
     const result = value1 * value;
 
     if (value=="" || value1 == "" || value2 == "") {
-      alert("input is empty");
+      alert('المدخل غير صالح');
       return;
     }
 
@@ -179,9 +180,9 @@ const Todo_list = () => {
             <div className='my-input-element'>
                 <input ref={inputref2} className='input3' placeholder='عدد الوحدات' />
             </div>
-            <button onClick={add}>اضافه</button>
-            <button onClick={send}>طباعه</button>
-            <button onClick={new_}>فاتوره جديده</button>
+            <Button variant="outline-success success" onClick={add}>اضافه</Button>
+            <Button variant="outline-danger" onClick={send}>طباعه</Button>
+            <Button variant="outline-warning" onClick={new_}>فاتوره جديده</Button>
         </div>
       </div>
   )}
