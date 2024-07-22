@@ -16,6 +16,7 @@ import Print from './print';
 const Todo_list = () => {
     const [x,setx] = useState(JSON.parse(localStorage.getItem('table')) || []);
     const [y,sety] = useState(JSON.parse(localStorage.getItem('total')) || 0);
+    const cv = 'X';
     const inputref = useRef();
     const inputref1 = useRef();
     const inputref2 = useRef();
@@ -31,7 +32,7 @@ const Todo_list = () => {
       return;
     }
 
-    const newData = [result , value ,  value1 , value2 ]
+    const newData = [result , value ,  value1 , value2 , cv]
       setx([...x,newData]);
       inputref.current.value = "";
       inputref1.current.value = "";
@@ -58,8 +59,10 @@ const Todo_list = () => {
     //////////////////////////////////////////////////
     const toDelete =(index)=>{
       const new_x = [...x];
-      new_x.splice(index,1)
-      setx(new_x)
+      sety(y-x[index][0]);
+      new_x.splice(index,1);
+      
+      setx(new_x);
     }
     return (
       <div className='app'> 
@@ -86,6 +89,7 @@ const Todo_list = () => {
           <th>عدد الوحدات</th>
           <th>القيمه الماليه للوحده</th>
           <th>المقاسات</th>
+          <th>الحذف</th>
         </tr>
       </thead>
 
@@ -95,7 +99,7 @@ const Todo_list = () => {
         x.map((row, rowIndex) => (
           <tr key={rowIndex}>
             {row.map((cell, colIndex) => (
-              <td key={`${rowIndex}-${colIndex}`}>{cell}</td>
+              <td onClick={()=>{if(colIndex == 4) toDelete(rowIndex)}} style={{'cursor' : colIndex == 4 ? 'pointer' : ''}}>{cell}</td>
             ))}
           </tr>
         ))

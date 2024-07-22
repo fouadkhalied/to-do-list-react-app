@@ -19,14 +19,17 @@ const Print =()=>{
     
     window.addEventListener('load' , ()=>{
         const len = 17 - x.length;
-        const ele = [' ' , ' ' , ' ' , ' '] ;
+        const ele = [' ' , ' ' , ' ' , ' ' , ' '];
         if(len > 0) { 
         for (let i = 0; i < len; i++) {
             x.push(ele);
         }}
+        const ce = () => {
+          return x.map(row => row.slice(0, -1));
+        }        
         console.log(x);
         console.log(len);
-        setout(x);
+        setout(ce);
     })
     const [y,sety] = useState(JSON.parse(localStorage.getItem('total')) || 0);
     return (
@@ -57,7 +60,7 @@ const Print =()=>{
         {out.map((row, rowIndex) => (
           <tr key={rowIndex}>
             {row.map((cell, colIndex) => (
-              <td style={{'height': '60px'}}><p style={{'font-weight': '700','display': 'inline','font-size': '30px'}}>{cell}</p></td>
+              <td style={{'height': '60px'}}><p style={{'font-weight': '600','font-size': '30px'}}>{cell}</p></td>
             ))}
           </tr>
         ))}
