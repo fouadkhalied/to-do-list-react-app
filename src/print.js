@@ -25,10 +25,10 @@ const Print =()=>{
             x.push(ele);
         }}
         const ce = () => {
-          return x.map(row => {return row.filter((_, index) => index !== 2 && index !== 4 && index !== 6 && index !== 7)})
+          return x.map(row => {return row.filter((_, index) => index !== 0 && index !== 1 && index !== 2 && index !== 5 && index !== 7 && index !== 10 && index !== 9)})
         }        
-        console.log(x);
-        console.log(len);
+        // console.log(x);
+        // console.log(len);
         setout(ce);
     })
     const [y,sety] = useState(JSON.parse(localStorage.getItem('total')) || 0);

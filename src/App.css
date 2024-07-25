@@ -52,7 +52,7 @@
 }
 .table-div
 {
-  height: 400px;
+  height: 380px;
   overflow: scroll;
 }
 .btn_x
@@ -69,12 +69,25 @@
   padding-left: 10px;
 }
 /* ////////////////////////////////////////////////////////////////////////////////////// */
-.my-input
+.my-input 
 {
+  display: flex;
+  width: 90%;
+  margin: auto;
+  border: 1px solid black;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  justify-content: space-around;
+}
+.my-input2 
+{
+  width: 90%;
+  margin: auto;
   display: flex;
   border: 1px solid black;
   border-radius: 20px;
   justify-content: space-around;
+  height: 50px;
 }
 /* /////////////////////////////////////////////////////////////// */
 .my-table
@@ -85,13 +98,20 @@
 }
 .head
 {
-   width: 30%;
+   width: 100%;
    text-align: center;
    margin: auto;
-   border: 1px solid black;
    margin-bottom: 50px;
    display: flex;
    justify-content: space-around;
+}
+.sub-head
+{
+  width: 30%;
+  border: 1px solid black;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
 }
 /* ////////////////////////////////////////////////////////////////////// */
 
