@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 import './App.css';
 import { useState , useEffect , useRef } from "react";
 import React from "react";
@@ -13,48 +5,44 @@ import Table from 'react-bootstrap/Table';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
-const Todo_list = () => {
-    const [x,setx] = useState(JSON.parse(localStorage.getItem('table')) || []);
-    const [y,sety] = useState(JSON.parse(localStorage.getItem('total')) || 0);
-    const [z,setz] = useState(JSON.parse(localStorage.getItem('profit')) || 0);
-    const sc = window.indexedDB.open("My testdatabase" , 3);
+import Spreadsheet from 'react-spreadsheet';
+import XLSX from 'xlsx'
+
+const Orders = ()=>{
+
+    const [x,setx] = useState(JSON.parse(localStorage.getItem('reciep_table')) || []);
+    const [y,sety] = useState(JSON.parse(localStorage.getItem('reciep_total')) || 0);
+    const [z,setz] = useState(JSON.parse(localStorage.getItem('reciep_profit')) || 0);
     const cv = '❌';
     const edit = '✎';
     const inputref = useRef();
     const inputref1 = useRef();
     const inputref2 = useRef();
-    const inputref3 = useRef();
     ///////////////////////////////////////////////////
     const add = ()=>{
-    const value = inputref2.current.value;
+    const value = inputref.current.value;
     const value1 = inputref1.current.value;
-    const value2 = inputref.current.value;
-    const value3 = inputref3.current.value;
-
-    const result = value1 * value;
-    const final = result - (value * value3);
+    const value2 = inputref2.current.value;
     //console.log(value , value3);
 
-    if (value=="" || value1 == "" || value2 == "" || value3 == "") {
+    if (value=="" || value1 == "" || value2 == "") {
       alert('المدخل غير صالح');
       return;
     }
 
-    const newData = [ final , value3 , edit , result , value , edit ,  value1 , edit , value2 , edit , cv]
+    const newData = [value2 , edit ,  value1 , edit , value , edit , cv]
       setx([...x,newData]);
       // inputref.current.value = "";
       // inputref1.current.value = "";
       // inputref2.current.value = "";
       // inputref3.current.value = "";
-      sety(y + result);
-      setz(z + final);
       console.log(x);
     }
     ///////////////////////////////////////////////////
     useEffect(() => {
-        localStorage.setItem('table',JSON.stringify(x) || []);
-        localStorage.setItem('total',JSON.stringify(y) || 0);
-        localStorage.setItem('profit',JSON.stringify (z)|| 0);
+        localStorage.setItem('reciep_table',JSON.stringify(x) || []);
+        localStorage.setItem('reciep_total',JSON.stringify(y) || 0);
+        localStorage.setItem('reciep_profit',JSON.stringify (z)|| 0);
       }, [x]);
     ///////////////////////////////////////////////////
     const send = (par) =>{
@@ -62,9 +50,9 @@ const Todo_list = () => {
     }
     //////////////////////////////////////////////////
     const new_ = () =>{
-       localStorage.setItem('table' , JSON.stringify([]));
-       localStorage.setItem('total' , JSON.stringify(0));
-       localStorage.setItem('profit' , JSON.stringify(0));
+       localStorage.setItem('reciep_table' , JSON.stringify([]));
+       localStorage.setItem('reciep_total' , JSON.stringify(0));
+       localStorage.setItem('reciep_profit' , JSON.stringify(0));
        setx([]);
        sety(0);
        setz(0);
@@ -83,35 +71,6 @@ const Todo_list = () => {
        const new_x = [...x];
        new_x[row][col] = my;
        setx(new_x);
-    }
-    //////////////////////////////////////////////////
-    const recalculate = ()=>{
-      let ertd = 0;
-      for (let i = 0; i < x.length; i++) {
-         ertd += x[i][3];
-      }
-      return ertd;
-    }
-    ///////////////////////////////////////////////////
-    const recalculate2 = ()=>{
-      let ertd = 0;
-      for (let i = 0; i < x.length; i++) {
-        ertd += x[i][0];
-      }
-      return ertd;
-    }
-    ///////////////////////////////////////////////////
-    const toeditnum = (row,col,my) =>{
-      const new_x = [...x];
-      new_x[row][col] = my;
-      //console.log(new_x[row][0] ,new_x[row][1] , new_x[row][3] , new_x[row][5]);
-      new_x[row][3] = new_x[row][4] * new_x[row][6];
-
-      new_x[row][0] = new_x[row][3] - (new_x[row][1] * new_x[row][4]);
-      sety(recalculate);
-      setz(recalculate2);
-      
-      setx(new_x);
     }
     ////////////////////////////////////////////////////
     const save = ()=>{
@@ -136,14 +95,15 @@ const Todo_list = () => {
               })
             }
         </ul> */}
-        <div className='head'>
-          <div className='sub-head'>
-          {z}
-          <label>اجمالي هامش الربح</label>
+        <div className='orders-head'>
+          <div className='orders-sub-head1'>
+              <div><input type="text" /><h3>: م.ض</h3></div>
+              <div><input type="text" /><h3>: رقم التسجيل</h3></div>
+              <div><input type="text" /><h3>: س.ت</h3></div>
           </div>
-          <div className='sub-head'>
-          {y}
-          <label>الاجمالي المالي الكلي</label>
+          <div className='orders-sub-head2'>
+          <input type='text'/>
+          <h3>المطلوب من السيد</h3>
           </div>
         </div>
 
@@ -153,13 +113,9 @@ const Todo_list = () => {
       {/* Render table headers */}
       <thead>
         <tr>
-          <th>هامش الربح</th>
-          <th>سعر الشراء</th>
+          <th>اللون</th>
           <th style={{'width' : '4%'}}>تعديل</th>
-          <th>الاجمالي المالي</th>
-          <th>عدد الوحدات</th>
-          <th style={{'width' : '4%'}}>تعديل</th>
-          <th>سعر البيع</th>
+          <th>الكميه</th>
           <th style={{'width' : '4%'}}>تعديل</th>
           <th>المقاسات</th>
           <th style={{'width' : '4%'}}>تعديل</th>
@@ -175,39 +131,32 @@ const Todo_list = () => {
             {row.map((cell, colIndex) => (
               <td onClick={
                 ()=>{
-                  if(colIndex == 10) {
+                  if(colIndex == 6) {
                     toDelete(rowIndex)
                   }
-                  else if(colIndex == 9) {
+                  else if(colIndex == 5) {
                     const defs = prompt('المقاس المعدل');
                     if(defs == "")
                         alert("المدخل فارغ")
                     else  
                         toedit(rowIndex , colIndex - 1 , defs);
                   } 
-                  else if(colIndex == 7) {
-                    const defs = prompt('القيمه الماليه المعدله');
+                  else if(colIndex == 3) {
+                    const defs = prompt('الكميه المعدله');
                     if(defs === "" || isNaN(defs) || defs === null)
                       alert("المدخل غير صالح")
                     else
-                      toeditnum(rowIndex , colIndex - 1 , defs);
+                      toedit(rowIndex , colIndex - 1 , defs);
                   }
-                  else if(colIndex == 5) {
-                    const defs = prompt('عدد الوحدات المعدل');
-                    if(defs === "" || isNaN(defs) || defs === null)
+                  else if(colIndex == 1) {
+                    const defs = prompt('اللون المعدل');
+                    if(defs === "")
                       alert("المدخل غير صالح")
                     else
-                      toeditnum(rowIndex , colIndex - 1 , defs);
-                  }
-                  else if(colIndex == 2) {
-                    const defs = prompt('سعر الشراء المعدل');
-                    if(defs === "" || isNaN(defs) || defs === null)
-                      alert("المدخل غير صالح");
-                    else
-                      toeditnum(rowIndex , colIndex - 1 , defs);
+                      toedit(rowIndex , colIndex - 1 , defs);
                   }
                 }
-              } style={{'cursor' : colIndex == 10 || colIndex == 9 || colIndex == 7 || colIndex == 5 || colIndex == 2 ? 'pointer' : ''}}>{cell}</td>
+              } style={{'cursor' : colIndex == 6 || colIndex == 5 || colIndex == 3 || colIndex == 1 ? 'pointer' : ''}}>{cell}</td>
             ))}
           </tr>
         ))
@@ -220,13 +169,10 @@ const Todo_list = () => {
                 <input ref={inputref} className='input1' placeholder='المقاسات' />
             </div>
             <div className='my-input-element'>
-                <input ref={inputref1} className='input2' placeholder='سعر البيع' />
+                <input ref={inputref1} className='input2' placeholder='الكميه' />
             </div>
             <div className='my-input-element'>
-                <input ref={inputref2} className='input3' placeholder='عدد الوحدات' />
-            </div>
-            <div className='my-input-element'>
-                <input ref={inputref3} className='input4' placeholder= 'سعر الشراء' />
+                <input ref={inputref2} className='input3' placeholder='اللون' />
             </div>
             <Button variant="outline-success success" onClick={add}>اضافه</Button>
         </div>
@@ -236,6 +182,6 @@ const Todo_list = () => {
             <Button variant="outline-info" onClick={save}>حفظ</Button>
         </div>
       </div>
-  )}
-
-export default React.memo(Todo_list);
+  )
+}
+export default React.memo(Orders);

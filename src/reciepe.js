@@ -13,10 +13,10 @@ import Table from 'react-bootstrap/Table';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
-const Todo_list = () => {
-    const [x,setx] = useState(JSON.parse(localStorage.getItem('table')) || []);
-    const [y,sety] = useState(JSON.parse(localStorage.getItem('total')) || 0);
-    const [z,setz] = useState(JSON.parse(localStorage.getItem('profit')) || 0);
+const Reciepe = () => {
+    const [x,setx] = useState(JSON.parse(localStorage.getItem('reciep_table')) || []);
+    const [y,sety] = useState(JSON.parse(localStorage.getItem('reciep_total')) || 0);
+    const [z,setz] = useState(JSON.parse(localStorage.getItem('reciep_profit')) || 0);
     const sc = window.indexedDB.open("My testdatabase" , 3);
     const cv = '❌';
     const edit = '✎';
@@ -52,9 +52,9 @@ const Todo_list = () => {
     }
     ///////////////////////////////////////////////////
     useEffect(() => {
-        localStorage.setItem('table',JSON.stringify(x) || []);
-        localStorage.setItem('total',JSON.stringify(y) || 0);
-        localStorage.setItem('profit',JSON.stringify (z)|| 0);
+        localStorage.setItem('reciep_table',JSON.stringify(x) || []);
+        localStorage.setItem('reciep_total',JSON.stringify(y) || 0);
+        localStorage.setItem('reciep_profit',JSON.stringify (z)|| 0);
       }, [x]);
     ///////////////////////////////////////////////////
     const send = (par) =>{
@@ -62,9 +62,9 @@ const Todo_list = () => {
     }
     //////////////////////////////////////////////////
     const new_ = () =>{
-       localStorage.setItem('table' , JSON.stringify([]));
-       localStorage.setItem('total' , JSON.stringify(0));
-       localStorage.setItem('profit' , JSON.stringify(0));
+       localStorage.setItem('reciep_table' , JSON.stringify([]));
+       localStorage.setItem('reciep_total' , JSON.stringify(0));
+       localStorage.setItem('reciep_profit' , JSON.stringify(0));
        setx([]);
        sety(0);
        setz(0);
@@ -238,4 +238,4 @@ const Todo_list = () => {
       </div>
   )}
 
-export default React.memo(Todo_list);
+export default React.memo(Reciepe);

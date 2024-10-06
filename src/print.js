@@ -5,7 +5,7 @@ import ds from './sd.PNG'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
-
+import React from 'react';
 
 
 
@@ -33,7 +33,7 @@ const Print =()=>{
     })
     const [y,sety] = useState(JSON.parse(localStorage.getItem('total')) || 0);
     return (
-        <>
+        <div className='print-recipe'>
             <div className='page-header'>
                  <div className='page-header-img'>
                    <img src={ds} width='200px' height='200px'/>
@@ -83,8 +83,8 @@ const Print =()=>{
           <p>...............................</p>
        </div>
       </div>  
-        </>
+        </div>
     )
 }
 
-export default Print;
+export default React.memo(Print);
