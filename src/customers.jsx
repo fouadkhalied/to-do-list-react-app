@@ -58,9 +58,9 @@ const Customers = ()=>{
     ////////////////////////////////////////////////////
     const save = async ()=>{
        try {
-          const response = await axios.post('/customers' , x);
-          console.log(response);
-          toast.success("success")
+          const response = await axios.get('/confirm');
+          console.log(response.data);
+          //toast.success("success")
           
        } catch (ex) {
           console.log(ex);
