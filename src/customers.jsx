@@ -58,7 +58,7 @@ const Customers = ()=>{
     ////////////////////////////////////////////////////
     const save = async ()=>{
        try {
-          const response = await axios.get('https://testcode404.netlify.app/.netlify/functions/server/confirm');
+          const response = await axios.post('https://testcode404.netlify.app/.netlify/functions/server/customers' , x);
           console.log(response.data);
           //toast.success("success")
           
