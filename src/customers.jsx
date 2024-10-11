@@ -2,14 +2,13 @@ import './App.css';
 import { useState , useEffect , useRef } from "react";
 import React from "react";
 import Table from 'react-bootstrap/Table';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
-import Spreadsheet from 'react-spreadsheet';
-import XLSX from 'xlsx'
+import { Button } from 'react-bootstrap'; 
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Customers = ()=>{
-
     const [x,setx] = useState(JSON.parse(localStorage.getItem('customers_table')) || []);
     const cv = '❌';
     const edit = '✎';
@@ -20,7 +19,7 @@ const Customers = ()=>{
     const inputref4 = useRef();
     ///////////////////////////////////////////////////
     const add = ()=>{
-    const value = inputref.current.value;
+    const value =  inputref.current.value;
     const value1 = inputref1.current.value;
     const value2 = inputref2.current.value;
     const value3 = inputref3.current.value;
@@ -38,20 +37,12 @@ const Customers = ()=>{
       // inputref1.current.value = "";
       // inputref2.current.value = "";
       // inputref3.current.value = "";
-      console.log(x);
+      //console.log(x);
     }
     ///////////////////////////////////////////////////
     useEffect(() => {
         localStorage.setItem('customers_table',JSON.stringify(x) || []);
       }, [x]);
-    ///////////////////////////////////////////////////
-    const send = (par) =>{
-       window.location = '/print'
-    }
-    //////////////////////////////////////////////////
-    const new_ = () =>{
-       localStorage.setItem('customers_table' , JSON.stringify([]));
-    }
     //////////////////////////////////////////////////
     const toDelete =(index)=>{
       const new_x = [...x];
@@ -65,10 +56,16 @@ const Customers = ()=>{
        setx(new_x);
     }
     ////////////////////////////////////////////////////
-    const save = ()=>{
-        window.location = '/data';     
+    const save = async ()=>{
+       try {
+          const response = await axios.post('/customers' , x);
+          console.log(response);
+          toast.success("success")
+          
+       } catch (ex) {
+          console.log(ex);
+       }
     }
-    ////////////////////////////////////////////////////
     // const toeditnum2 = (row,col,my) =>{
     //   const new_x = [...x];
     //   new_x[row][col] = my;
@@ -171,7 +168,7 @@ const Customers = ()=>{
             </div>
             <Button variant="outline-success success" onClick={add}>اضافه</Button>
         </div>
-        
+        <Button variant="outline-success success" onClick={save}>حفظ</Button>
       </div>
   )
 }

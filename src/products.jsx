@@ -2,11 +2,9 @@ import './App.css';
 import { useState , useEffect , useRef } from "react";
 import React from "react";
 import Table from 'react-bootstrap/Table';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Await, BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
-import Spreadsheet from 'react-spreadsheet';
-import XLSX from 'xlsx'
 
 const Product = () =>{
     const [x,setx] = useState(JSON.parse(localStorage.getItem('product_details_table')) || []);
@@ -29,7 +27,7 @@ const Product = () =>{
     const value5 = inputref5.current.value;
     const value6 = inputref6.current.value;
     //console.log(value , value3);
-
+    
     if (value=="") {
       alert('المدخل غير صالح');
       return;
