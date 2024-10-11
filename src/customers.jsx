@@ -58,7 +58,7 @@ const Customers = ()=>{
     ////////////////////////////////////////////////////
     const save = async ()=>{
        try {
-          const response = await axios.get('/confirm');
+          const response = await axios.get('https://testcode404.netlify.app/.netlify/functions/server/confirm');
           console.log(response.data);
           //toast.success("success")
           
@@ -169,6 +169,7 @@ const Customers = ()=>{
             <Button variant="outline-success success" onClick={add}>اضافه</Button>
         </div>
         <Button variant="outline-success success" onClick={save}>حفظ</Button>
+        <Button variant="outline-success success" >تأكيد</Button>
       </div>
   )
 }

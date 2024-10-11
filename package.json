@@ -2,7 +2,6 @@
   "name": "todo-list",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://testcode404.netlify.app/.netlify/functions/server/",
   "dependencies": {
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
