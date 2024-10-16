@@ -58,8 +58,11 @@ const Customers = ()=>{
     ////////////////////////////////////////////////////
     const save = async ()=>{
        try {
-          const response = await axios.post('https://backend-vercel-rust.vercel.app/customers_api' , x);
-          console.log(response.data);
+          const tryres = await axios.get('https://backend-vercel-rust.vercel.app/confirm')
+          console.log(tryres);
+          
+          // const response = await axios.post('https://backend-vercel-rust.vercel.app/customers_api' , x);
+          // console.log(response.data);
           //toast.success("success")
           
        } catch (ex) {
