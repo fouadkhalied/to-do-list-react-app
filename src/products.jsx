@@ -5,9 +5,19 @@ import Table from 'react-bootstrap/Table';
 import { Await, BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
+import axios from 'axios'
 
 const Product = () =>{
-    const [x,setx] = useState(JSON.parse(localStorage.getItem('product_details_table')) || []);
+    const [x,setx] = useState(JSON.parse(localStorage.getItem('products_table')) || []);
+
+    window.onload=async ()=>{
+      const ert = await axios.get('http://localhost:5000/products_data');
+
+      localStorage.setItem('products_table',JSON.stringify(ert.data) || []);
+      setx(ert.data)
+      console.log(ert.data);
+      
+  }
     const cv = '❌';
     const edit = '✎';
     const inputref = useRef();
@@ -19,7 +29,7 @@ const Product = () =>{
     const inputref6 = useRef();
     ///////////////////////////////////////////////////
     const add = ()=>{
-    const value = inputref.current.value;
+    const value  = inputref.current.value;
     const value1 = inputref1.current.value;
     const value2 = inputref2.current.value;
     const value3 = inputref3.current.value;
@@ -43,7 +53,7 @@ const Product = () =>{
     }
     ///////////////////////////////////////////////////
     useEffect(() => {
-        localStorage.setItem('product_details_table',JSON.stringify(x) || []);
+        localStorage.setItem('products_table',JSON.stringify(x) || []);
       }, [x]);
     ///////////////////////////////////////////////////
     const send = (par) =>{
@@ -51,7 +61,7 @@ const Product = () =>{
     }
     //////////////////////////////////////////////////
     const new_ = () =>{
-       localStorage.setItem('product_details_table' , JSON.stringify([]));
+       localStorage.setItem('products_table' , JSON.stringify([]));
     }
     //////////////////////////////////////////////////
     const toDelete =(index)=>{
@@ -65,6 +75,20 @@ const Product = () =>{
        new_x[row][col] = my;
        setx(new_x);
     }
+
+    const save = async ()=>{
+      try {
+         // const tryres = await axios.get('https://backend-vercel-rust.vercel.app/confirm')
+         // console.log(tryres);
+         
+         const response = await axios.post('http://localhost:5000/products_api' , x);
+         console.log(response.data);
+         //toast.success("success")
+         
+      } catch (ex) {
+         console.log(ex);
+      }
+   }
     ////////////////////////////////////////////////////
     // const toeditnum2 = (row,col,my) =>{
     //   const new_x = [...x];
@@ -192,7 +216,7 @@ const Product = () =>{
             </div>
             <Button variant="outline-success success" onClick={add}>اضافه</Button>
         </div>
-        
+        <Button variant="outline-success success" onClick={save}>حفظ</Button>
       </div>
   )
 }

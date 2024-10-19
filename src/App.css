@@ -20,7 +20,7 @@ header .header-title {
 .app
 {
   width: 100%;
-  height: 100vh;
+  height: 85vh;
 }
 .app h2
 {
@@ -51,6 +51,7 @@ header .header-title {
   border: none;
   display: block;
   margin: auto;
+  align-items: center;
 }
 .app li
 {
@@ -216,6 +217,7 @@ header .header-title {
 
 /* ///////////////////////////////////////////// */
 
+
 .orders-head
 {
    border: 1px solid black;
@@ -237,6 +239,8 @@ header .header-title {
    justify-content: space-between;
    align-items: center;
    text-align: right;
+   border: 1px solid black;
+   height: 50px;
 }
 .orders-sub-head1 div input 
 {
@@ -249,7 +253,9 @@ header .header-title {
   justify-content: space-between; 
   align-items: center;
 }
-
+.orders-sub-head2 div {
+  height: 150px;
+}
 /* ////////////////////////////////////////////////////////////////////////////////////////////// */
 .my-input_product_costs {
   display: flex;

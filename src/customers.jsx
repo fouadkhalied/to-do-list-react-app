@@ -10,6 +10,16 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Customers = ()=>{
     const [x,setx] = useState(JSON.parse(localStorage.getItem('customers_table')) || []);
+
+    window.onload=async ()=>{
+      const ert = await axios.get('http://localhost:5000/customers_data');
+
+      localStorage.setItem('customers_table',JSON.stringify(ert.data) || []);
+      setx(ert.data)
+      //console.log(ert.data);
+  }
+
+  
     const cv = '❌';
     const edit = '✎';
     const inputref = useRef();
@@ -58,11 +68,11 @@ const Customers = ()=>{
     ////////////////////////////////////////////////////
     const save = async ()=>{
        try {
-          const tryres = await axios.get('https://backend-vercel-rust.vercel.app/confirm')
-          console.log(tryres);
+          // const tryres = await axios.get('https://backend-vercel-rust.vercel.app/confirm')
+          // console.log(tryres);
           
-          // const response = await axios.post('https://backend-vercel-rust.vercel.app/customers_api' , x);
-          // console.log(response.data);
+          const response = await axios.post('http://localhost:5000/customers_api' , x);
+          console.log(response.data);
           //toast.success("success")
           
        } catch (ex) {

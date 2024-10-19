@@ -97,13 +97,13 @@ const Orders = ()=>{
         </ul> */}
         <div className='orders-head'>
           <div className='orders-sub-head1'>
-              <div><input type="text" /><h3>: م.ض</h3></div>
-              <div><input type="text" /><h3>: رقم التسجيل</h3></div>
-              <div><input type="text" /><h3>: س.ت</h3></div>
+              <div><input type="text" /><h4>: م.ض</h4></div>
+              <div><input type="text" /><h4>: رقم التسجيل</h4></div>
+              <div><input type="text" /><h4>: س.ت</h4></div>
           </div>
           <div className='orders-sub-head2'>
           <input type='text'/>
-          <h3>المطلوب من السيد</h3>
+          <h4>المطلوب من السيد</h4>
           </div>
         </div>
 

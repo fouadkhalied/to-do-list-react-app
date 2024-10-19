@@ -2,14 +2,19 @@ import './App.css';
 import { useState , useEffect , useRef } from "react";
 import React from "react";
 import Table from 'react-bootstrap/Table';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
-import Spreadsheet from 'react-spreadsheet';
-import XLSX from 'xlsx'
+import axios from 'axios'
 
 const Product_cost = () =>{
     const [x,setx] = useState(JSON.parse(localStorage.getItem('product_costs_table')) || []);
+    window.onload = async ()=>{
+      const ert = await axios.get('http://localhost:5000/products_cost_data');
+
+      localStorage.setItem('products_table',JSON.stringify(ert.data) || []);
+      setx(ert.data)
+      console.log(ert.data);
+   }
     const cv = '❌';
     const edit = '✎';
     const inputref = useRef();
@@ -68,9 +73,19 @@ const Product_cost = () =>{
        setx(new_x);
     }
     ////////////////////////////////////////////////////
-    const save = ()=>{
-        window.location = '/data';     
-    }
+    const save = async ()=>{
+      try {
+         // const tryres = await axios.get('https://backend-vercel-rust.vercel.app/confirm')
+         // console.log(tryres);
+         
+         const response = await axios.post('http://localhost:5000/products_cost_api' , x);
+         console.log(response.data);
+         //toast.success("success")
+         
+      } catch (ex) {
+         console.log(ex);
+      }
+   }
     ////////////////////////////////////////////////////
     // const toeditnum2 = (row,col,my) =>{
     //   const new_x = [...x];
@@ -198,7 +213,7 @@ const Product_cost = () =>{
             </div>
             <Button variant="outline-success success" onClick={add}>اضافه</Button>
         </div>
-        
+        <Button variant="outline-success success" onClick={save}>حفظ</Button>
       </div>
   )
 }
