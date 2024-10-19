@@ -12,7 +12,7 @@ const Customers = ()=>{
     const [x,setx] = useState(JSON.parse(localStorage.getItem('customers_table')) || []);
 
     window.onload=async ()=>{
-      const ert = await axios.get('http://localhost:5000/customers_data');
+      const ert = await axios.get('https://backend-vercel-rust.vercel.app/customers_data');
 
       localStorage.setItem('customers_table',JSON.stringify(ert.data) || []);
       setx(ert.data)
@@ -71,7 +71,7 @@ const Customers = ()=>{
           // const tryres = await axios.get('https://backend-vercel-rust.vercel.app/confirm')
           // console.log(tryres);
           
-          const response = await axios.post('http://localhost:5000/customers_api' , x);
+          const response = await axios.post('https://backend-vercel-rust.vercel.app/customers_api' , x);
           console.log(response.data);
           //toast.success("success")
           
